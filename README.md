@@ -1,5 +1,4 @@
 # CaptapApp
-# CaptapApp
 
 **A scalable, cross-platform Pharmacy Management System built with Flutter**  
 (Mobile • Tablet • Desktop)
