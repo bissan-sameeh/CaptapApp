@@ -7,25 +7,25 @@ A scalable, cross-platform **Pharmacy Management System** built with **Flutter**
 
 ## 📌 Project Overview
 
-CaptapApp is a multi-platform pharmacy management system designed and implemented using Flutter, intended to serve real business workflows across mobile, tablet, and desktop devices.
+CaptapApp is a multi-platform pharmacy management system designed and implemented using Flutter to support **real-world pharmacy business workflows** across mobile, tablet, and desktop devices.
 
-This repository showcases the **architecture, design decisions, and code structure** of the project. The full production source code is not included due to confidentiality and code ownership constraints.
+This repository focuses on showcasing **architecture, design decisions, scalability strategies, and development practices**. The full production codebase is not included due to **confidentiality and code ownership constraints**.
 
 ---
 
 ## 🚀 Key Features
 
-* Modular architecture following **Clean Architecture** principles
-* Organized state management using **BLoC**
-* Local database integration with **sqflite**
-* Responsive UI adapted for:
+* Modular and scalable architecture using **Clean Architecture**
+* Predictable and maintainable state management with **BLoC**
+* Local database integration using **sqflite**
+* Fully responsive UI for:
 
   * 📱 Mobile
   * 📊 Tablet
   * 🖥️ Desktop
-* Integration with real device features:
+* Real device integrations:
 
-  * QR code scanning
+  * QR Code scanning
   * Barcode scanning
   * Camera access & permissions
   * Location and address handling
@@ -33,114 +33,72 @@ This repository showcases the **architecture, design decisions, and code structu
 
 ---
 
-## 🧠 Architecture & Design
+## 🧠 Architecture & Design Philosophy
 
-CaptapApp was architected with **scalability and maintainability** in mind from the very beginning.
+CaptapApp was architected with **long-term scalability, maintainability, and clarity** in mind before any implementation started.
 
 ### 🔹 Clean Architecture
 
 The project is structured into three main layers:
 
-* **Presentation Layer**: UI + BLoC
-* **Domain Layer**: Business logic & use cases
-* **Data Layer**: Local and remote data sources
+* **Presentation Layer**
+  UI components + BLoC for state handling
 
-This separation allows:
+* **Domain Layer**
+  Business logic, use cases, and core rules
 
-* Easy feature expansion (Inventory, Suppliers, Reports, etc.)
-* Clear responsibilities per layer
-* Minimal impact when introducing new modules
+* **Data Layer**
+  Local & remote data sources, repositories, and API implementations
+
+This separation ensures:
+
+* Minimal coupling between layers
+* Easy testing and refactoring
+* Smooth expansion with new modules (Inventory, Suppliers, Reports, etc.)
 
 ---
 
-## 📐 State Management
+## 🔄 State Management (BLoC)
 
-State is managed using **BLoC**, providing:
+State management is handled using **BLoC**, providing:
 
 * Clear and predictable state transitions
-* Centralized loading and error handling
-* Clean separation between UI and business logic
+* Centralized loading & error handling
+* Decoupling between UI and business logic
 
-Use cases are injected into BLoCs instead of being instantiated inside classes, ensuring better testability and maintainability.
+Use cases are **injected** into BLoCs instead of being instantiated internally, ensuring clean dependency flow and improved testability.
 
----
-
-## 💾 Local Storage
-
-Local persistence is implemented using **sqflite**, supporting:
-
-* Multiple relational tables
-* Offline access
-* Caching strategies for improved performance
+![BLoC & UseCases](screenshots/Screenshot%20\(1493\).png)
 
 ---
 
-## 🌐 Networking
+## 🌐 Networking Layer
 
-Networking is implemented using **Dio**, featuring:
+Networking is implemented using **Dio** with a clean and extensible setup:
 
 * Centralized API configuration
-* Request and response validation
+* Request & response validation
 * Interceptors for:
 
   * Logging
   * Error handling
   * Request status monitoring
 
-Abstract classes are used to reuse RESTful API methods and enforce consistent API contracts across the data layer.
+Abstract classes are used to define RESTful API contracts and allow method reuse across multiple services.
+
+![Dio Interceptors](screenshots/Screenshot%20\(1492\).png)
+![Abstract API](screenshots/Screenshot%20\(1491\).png)
 
 ---
 
-## 📱 Responsive UI Strategy
+## ⚖️ Object Comparison & Performance
 
-The UI includes more than **380 screens**, all converted from Figma designs into a responsive Flutter interface.
+To ensure accurate state comparison and avoid unnecessary object recreation, **Equatable** is used:
 
-### ❌ Why ScreenUtil Was Not Enough
+* Efficient object comparison
+* Improved performance in BLoC state updates
 
-Although ScreenUtil was initially used, it introduced limitations when:
-
-* System font size increased (accessibility scenarios)
-* Rendering layouts on tablets and desktops
-* Maintaining predictable scaling across platforms
-
-### ✅ Custom Config & Size Management
-
-Instead of ScreenUtil, a **custom Config / SizeConfig approach** was implemented:
-
-* Clear breakpoints for Mobile / Tablet / Desktop
-* Centralized control for spacing, padding, and typography
-* Respect for system font scaling
-* Predictable and accessible layouts
-
-Separate layout logic/classes are used for each device type, ensuring clarity and long-term maintainability.
-
----
-
-## 🌍 Localization & Accessibility
-
-### 🌐 Multi-Language Support
-
-CaptapApp supports three languages:
-
-* Arabic (RTL support)
-* English
-* Turkish
-
-Localization is handled using a centralized **AppLocalization** system, allowing:
-
-* Clean language switching
-* Easy addition of new languages
-* Separation of UI and translation resources
-
----
-
-## 🎨 Theme & Color Management
-
-All application colors are centralized using a **ColorManager** implemented as an **abstract class with static properties**:
-
-* No hardcoded colors in UI widgets
-* Consistent theming across the app
-* Easy brand or theme updates
+![Equatable](screenshots/equtable.PNG)
 
 ---
 
@@ -148,9 +106,79 @@ All application colors are centralized using a **ColorManager** implemented as a
 
 Dependency Injection is implemented using a **Service Locator** pattern:
 
-* Organized object creation
-* Lazy initialization when needed
+* Centralized object creation
+* Lazy initialization when required
 * Clean dependency management across layers
+
+![Dependency Injection](screenshots/Screenshot%20\(1490\).png)
+
+---
+
+## 📱 Navigation & Routing
+
+Navigation is handled using a centralized `generateRoute` approach:
+
+* Clean route definitions
+* Decoupled navigation logic
+* Easy scalability for future modules
+
+![Generate Route](screenshots/Screenshot%20\(1494\).png)
+
+---
+
+## 📐 Responsive UI Strategy
+
+The UI includes **380+ screens**, all converted from Figma into a fully responsive Flutter interface.
+
+### ❌ Why ScreenUtil Was Not Enough
+
+ScreenUtil showed limitations when:
+
+* System font size increased (accessibility issues)
+* Layouts were rendered on tablets & desktops
+* Scaling became inconsistent across platforms
+
+### ✅ Custom Config & Size Management
+
+A **custom Config / SizeConfig solution** was implemented instead:
+
+* Defined clear breakpoints (Mobile / Tablet / Desktop)
+* Centralized spacing, padding, and typography rules
+* Full respect for system font scaling
+* Predictable layouts across all platforms
+
+![Size Config](screenshots/size_config.PNG)
+![Responsive Layouts](screenshots/responsive.PNG)
+
+---
+
+## 🌍 Localization & Accessibility
+
+CaptapApp supports **three languages**:
+
+* Arabic (RTL support)
+* English
+* Turkish
+
+Localization is handled using a centralized **AppLocalization** system:
+
+* Clean language switching
+* Easy addition of new languages
+* Separation of UI and translation resources
+
+![App Localization](screenshots/app_localization.PNG)
+
+---
+
+## 🎨 Theme & Color Management
+
+All application colors are managed using a **ColorManager** implemented as an **abstract class with static properties**:
+
+* No hardcoded colors in UI widgets
+* Consistent theming across the entire app
+* Easy brand and theme updates
+
+![Color Manager](screenshots/abstract_static_color_manager.PNG)
 
 ---
 
@@ -158,17 +186,17 @@ Dependency Injection is implemented using a **Service Locator** pattern:
 
 Before development started:
 
-* Functional and non-functional requirements were defined
-* Scalability paths and future modules were planned
-* Core technical decisions (state management, storage, networking) were finalized
+* Functional & non-functional requirements were defined
+* Scalability paths were planned
+* Core technical decisions were finalized early
 
-This planning resulted in a predictable and maintainable codebase suitable for large-scale business systems.
+This approach resulted in a **predictable, maintainable, and production-ready codebase**.
 
 ---
 
 ## 🎯 Client-Focused Development
 
-Throughout the implementation:
+Throughout implementation:
 
 * Real pharmacy workflows guided feature design
 * UI/UX decisions matched real usage scenarios
@@ -176,21 +204,9 @@ Throughout the implementation:
 
 ---
 
-## 📸 Screenshots & Architecture Showcase
+## 📸 Cross-Platform Mockup
 
-To respect code ownership, selected screenshots are included to demonstrate architectural decisions:
-
-* **captap_mockup.png**: Cross-platform UI mockup
-* **Screenshot (1494).png**: Centralized generateRoute navigation
-* **Screenshot (1493).png**: BLoC usage with injected use cases
-* **equtable.PNG**: Object comparison using Equatable
-* **Screenshot (1492).png**: Dio networking with interceptors
-* **Screenshot (1491).png**: Abstract classes for RESTful APIs
-* **Screenshot (1490).png**: Dependency Injection as a Service Locator
-* **size_config.PNG**: Custom screen size & breakpoint management
-* **responsive.PNG**: Separate layouts for mobile, tablet, and desktop
-* **abstract_static_color_manager.PNG**: Centralized color management
-* **app_localization.PNG**: Multi-language implementation
+![Captap Mockup](screenshots/captap_mockup.png)
 
 ---
 
@@ -217,8 +233,6 @@ flutter run
 
 ## 📄 Notes
 
-This repository is intended for **portfolio and architectural demonstration purposes**. Proprietary business logic and full production code are intentionally excluded.
-
----
+This repository is intended for **portfolio and architectural demonstration purposes only**. Proprietary business logic and full production code are intentionally excluded.
 
 ⭐ If you find this project useful or interesting, feel free to star the repository.
