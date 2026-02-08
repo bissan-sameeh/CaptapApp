@@ -207,7 +207,7 @@ Throughout implementation:
 
 ## 📸 Cross-Platform Mockup
 
-![CaptapApp Mockup](screenshots/captap_mokup.png)
+![CaptapApp Mockup](captap_mokup.png)
 
 
 ---
