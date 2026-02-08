@@ -69,7 +69,7 @@ State management is handled using **BLoC**, providing:
 
 Use cases are **injected** into BLoCs instead of being instantiated internally, ensuring clean dependency flow and improved testability.
 
-![BLoC & UseCases](screenshots/Screenshot%20\(1493\).png)
+![BLoC & UseCases](Screenshot%20\(1493\).png)
 
 ---
 
@@ -87,8 +87,8 @@ Networking is implemented using **Dio** with a clean and extensible setup:
 
 Abstract classes are used to define RESTful API contracts and allow method reuse across multiple services.
 
-![Dio Interceptors](screenshots/Screenshot%20\(1492\).png)
-![Abstract API](screenshots/Screenshot%20\(1491\).png)
+![Dio Interceptors](Screenshot%20\(1492\).png)
+![Abstract API](Screenshot%20\(1491\).png)
 
 ---
 
@@ -99,7 +99,7 @@ To ensure accurate state comparison and avoid unnecessary object recreation, **E
 * Efficient object comparison
 * Improved performance in BLoC state updates
 
-![Equatable](screenshots/equtable.PNG)
+![Equatable](equtable.PNG)
 
 ---
 
@@ -111,7 +111,7 @@ Dependency Injection is implemented using a **Service Locator** pattern:
 * Lazy initialization when required
 * Clean dependency management across layers
 
-![Dependency Injection](screenshots/Screenshot%20\(1490\).png)
+![Dependency Injection](Screenshot%20\(1490\).png)
 
 ---
 
@@ -123,7 +123,7 @@ Navigation is handled using a centralized `generateRoute` approach:
 * Decoupled navigation logic
 * Easy scalability for future modules
 
-![Generate Route](screenshots/Screenshot%20\(1494\).png)
+![Generate Route](Screenshot%20\(1494\).png)
 
 ---
 
@@ -148,8 +148,8 @@ A **custom Config / SizeConfig solution** was implemented instead:
 * Full respect for system font scaling
 * Predictable layouts across all platforms
 
-![Size Config](screenshots/size_config.PNG)
-![Responsive Layouts](screenshots/responsive.PNG)
+![Size Config](size_config.PNG)
+![Responsive Layouts](responsive.PNG)
 
 ---
 
@@ -167,7 +167,7 @@ Localization is handled using a centralized **AppLocalization** system:
 * Easy addition of new languages
 * Separation of UI and translation resources
 
-![App Localization](screenshots/app_localization.PNG)
+![App Localization](app_localization.PNG)
 
 ---
 
@@ -179,7 +179,7 @@ All application colors are managed using a **ColorManager** implemented as an **
 * Consistent theming across the entire app
 * Easy brand and theme updates
 
-![Color Manager](screenshots/abstract_static_color_manager.PNG)
+![Color Manager](abstract_static_color_manager.PNG)
 
 ---
 
