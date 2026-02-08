@@ -33,6 +33,7 @@ This repository focuses on showcasing **architecture, design decisions, scalabil
 
 ---
 
+
 ## 🧠 Architecture & Design Philosophy
 
 CaptapApp was architected with **long-term scalability, maintainability, and clarity** in mind before any implementation started.
